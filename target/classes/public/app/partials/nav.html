@@ -1,0 +1,122 @@
+	    <!-- Navigation -->
+	    <nav class="navbar navbar-custom navbar-static-top" role="navigation" style="margin-bottom: 0">
+	        <div class="navbar-header">
+	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	            <a class="navbar-brand" ui-sref="home"></a>
+	        </div>
+	        <!-- /.navbar-header -->
+	
+		   	<ul class="nav navbar-top-links navbar-right">
+		  		 <li class="dropdown"> 
+		  		 		  
+		                  <span class="dropdown-toggle" data-toggle="dropdown">
+		                      <i class="fa fa-bell fa-fw"></i>
+		                       <span class="badge badge-custom" ng-if="notif.length>0">{{notif.length}}</span>
+		                  </span>
+		                 
+		                  <ul class="dropdown-menu nav-dropdown notif-dropdown"  ng-if="notif.length>0" >
+		                       <li ng-repeat ="notif in notif">
+	                       		<div ng-click="viewNotif(notif)">
+	                       			<div>
+	                       				<strong class="notif-title">{{notif.title}} </strong>
+	                       				<span class="pull-right text-muted"><em>{{notif.createdAt | date}}</em></span>
+	                       			</div>
+	                       			<div class="notif-body">{{notif.body}}</div>
+	                       		</div>
+		                       
+		                       	
+		                       </li>
+		                       <li class="divider"></li>   
+		                       <li> <span ng-click="viewAll()"><strong>Mark all as read</strong></span></li>
+		                    </ul>
+		              <li class="dropdown">
+		                  <span class="dropdown-toggle" data-toggle="dropdown">
+		                      <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+		                  </span>
+		                  <ul class="dropdown-menu nav-dropdown">
+		                        <li ng-click="showChangePassModal()"><span><i class="fa fa-key fa-fw"></i> Change password</span>
+		                        </li>
+		                        <li class="divider"></li>
+		                        <li ng-click="logout()">
+		                        	<span><i class="fa fa-sign-out fa-fw"></i> Logout</span>
+		                        </li>
+		                    </ul>
+		               </li>
+		         </ul>
+	
+	        <div class="navbar-default sidebar" role="navigation">
+	            <div class="sidebar-nav navbar-collapse">
+	                <ul class="nav" id="side-menu">
+	                
+	                   <li class="logo">
+	                    	<img src="/app/img/login/login_logo.jpg"/>
+	                    </li>
+	                     
+                  		
+	                     <li class="profile">
+	                    	<div class="user">{{user.fullname}}</div>
+	                    </li>
+	                    <li>
+	                        <a ui-sref="home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+	                    </li>
+	                    
+	                    <li ng-if="isAdmin()">
+	                        <a ui-sref="registrations"><i class="fa fa-users fa-fw"></i> User Registrations</a>
+	                    </li>
+	                    
+	                     <li ng-if="isAdmin()">
+	                        <a ui-sref="run_registrations"><i class="fa fa-pencil fa-fw"></i> Run Registrations</a>
+	                    </li>
+	                    
+	                    <li ng-if="isAdmin()">
+	                        <a ui-sref="records"><i class="fa fa-book fa-fw"></i> Submitted Records</a>
+	                    </li>
+	                    
+	                     <li>
+	                    	<a ui-sref="leaderboards"> <i class="fa fa-bar-chart fa-fw"></i> Leaderboards </a>
+                        </li>
+                       <li ng-if="isAdmin()">
+	                        <a ui-sref="users"><i class="fa fa-users fa-fw"></i> Registered Users</a>
+	                    </li>
+	                    <li>
+	                        <a ui-sref="events"><i class="fa fa-flag fa-fw"></i> Events</a>
+	                    </li>
+	                    
+	                    
+	                </ul>
+	            </div>
+	            <!-- /.sidebar-collapse -->
+	        </div>
+	        <!-- /.navbar-static-side -->
+	    </nav>
+	   <!-- /Navigation -->  
+	   
+<div class="modal fade modal-md in" id="update-password" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header modal-custom">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title">Change Password</h3>
+			</div>
+			<form ng-submit="changePassword()">
+				<div class="modal-body">
+					<fieldset>
+						<label>New Password</label>
+						<input type="password" class="form-control" ng-model ="newPassword.password" required/>
+						<label>Confirm password</label>
+						<input type="password" class="form-control" ng-model ="newPassword.confirm_password" required/>
+						<div class="text-danger">{{error}}</div>
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" type="submit">Save</button><button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

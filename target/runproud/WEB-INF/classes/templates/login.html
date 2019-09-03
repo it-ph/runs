@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+     >
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>Run Proud | Personiv</title>
+
+	
+	<link rel="shortcut icon" href="/app/img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/app/img/favicon.ico" type="image/x-icon" />
+    <link href="/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+ 
+  <link href="/app/css/main.css" rel="stylesheet" />
+</head>
+<body>
+
+	
+	<div id="login-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-offset-3">
+        <div class="login-panel panel">
+
+          <div class="panel-body">
+            <form role="form" method ="POST" action="authenticate">
+
+      
+              <fieldset>
+              <div style="margin-bottom:150px;"></div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="username"><i class="fa fa-user fa-fw" ></i></span>
+                    <input class="form-control" placeholder="Username" name="text" type="text" aria-label="username" aria-describedby="username"/>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="fa fa-lock fa-fw" ></i></span>
+                    <input class="form-control" placeholder="Password" name="password" type="password"  aria-label="username" aria-describedby="username" />
+                  </div>
+                </div>
+
+                <div class="form-group text-left has-error">
+                  <div class="help-block" style="text-align:center;">
+                    <i class="lnr-"></i><span></span>
+                  </div>
+                </div>
+                <!-- Change this to a button or input when using this as a form -->
+                <button type="submit" class="btn btn-lg btn-primary btn-block"><i class="lnr lnr-rocket"></i> Login</button>
+                <!-- <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a> -->
+
+                <br />
+                <div class="text-center">
+                  <a href="/" class="login-back-btn"><i class="lnr lnr-undo"></i> Back to home page</a>
+                </div>
+
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+ 	<script src="/vendor/jquery/dist/jquery.min.js"></script>
+ 	<script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+ </body>
+</html>

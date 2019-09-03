@@ -1,0 +1,37 @@
+ server:
+  port: 8080
+  contextPath: /
+  
+ spring:
+   datasource:
+     url: jdbc:mysql://localhost/run_proud
+     username: root
+     password: 93rS0n1V2018!
+     driver-class-name: com.mysql.jdbc.Driver
+   thymeleaf.cache: false
+   mail:
+    host: smtp.office365.com
+    port: 587
+    username: "runproud@personiv.com"
+    password: "migration-HT24"
+    properties: 
+      mail: 
+        debug: false
+        transport:
+          protocol: smtp
+        smtp: 
+          auth: true
+          ssl:
+            enable: false
+          starttls:
+            enable: true
+            required: true      
+    protocol: smtp          
+ jwt:
+   client: rUn9r0Ud-93r$0niv
+   secret: rUn9r0Ud-93r$0niv-$3cr3T
+   expiration: 604800
+ logging:
+  level:
+    org.hibernate.SQL: debug
+ 

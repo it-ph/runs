@@ -1,0 +1,65 @@
+<!-- Page Content -->
+  <div id="page-wrapper">
+      <div class="container-fluid">
+      
+      	<div class="row">
+      	<div class="col-lg-12"></div>
+			<div class="col-lg-12">
+			
+				<div class="panel panel-custom">
+					<div class="panel-heading"><h3>Run Event Participants </h3></div>
+					<div class="panel-body">
+						  <div class ="page-search">
+								<span class="num-entries">Show<select ng-model="participants.numPerPage" ng-options="page for page in participants.numPerPageSelections" ng-change="participants.numPageChange()"></select>
+									entries
+								</span>
+								<div class="search-box">
+									<div class="input-group">
+									        <input class="form-control search" type="text" placeholder="Search" ng-model="participants.searchKeyword" ng-change="participants.search()" />
+									        <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+								      </div>
+							     </div>
+							</div>
+						<div class="table-custom"> 
+				      		<table class="table table-hover table-striped table-bordered">
+				      			<thead>
+				      				<tr>
+				      					<th>Full Name</th>
+				      					<th>Email</th>
+				      					<th>Category</th>
+				      					<th>Facility</th>
+				      					<th>Run Start</th>
+				      					<th>Run End</th>
+				      					<th>Date Registered</th>
+				      				</tr>
+				      			</thead>
+				      			<tbody>
+				      				<tr ng-repeat ="participant in participants.currentPageList">
+				      					<td class="dropdown table-item">{{participant.fullName}}</td>
+				      					<td>{{participant.email}}</td>
+				      					<td>{{participant.eventCategory}}</td>
+				      					<td>{{participant.facility}}</td>
+				      					<td>{{participant.eventRunStart | date}}</td>
+				      					<td>{{participant.eventRunEnd | date}}</td>
+				      					<td>{{participant.eventRegistered | date}}</td>
+				      				</tr>
+				      			</tbody>
+				      		</table>
+				      		<div uib-pagination class="custom-pagination" 
+				      			 total-items="participants.totalItems" 
+				      			 ng-model="participants.currentPage"
+				      			  max-size="participants.maxSize" 
+				      			  boundary-links="true" 
+				      			  items-per-page="participants.numPerPage" 
+				      			  ng-change="participants.numPageChange()">
+ 
+			      		</div>
+		      		</div>
+	      		</div>
+      		</div>
+   		</div>
+      </div>
+      </div>
+      <!-- /.container-fluid -->
+  </div>
+  

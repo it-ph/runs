@@ -1,0 +1,54 @@
+
+<div id="login-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-offset-3">
+        <div class="login-panel panel">
+
+          <div class="panel-body">
+            <form role="form" ng-submit="logUser()">
+
+      
+              <fieldset>
+              <div  class="login-logo-wrapper">
+              	 <div class="login-logo">
+              		<img src="/app/img/login/login_logo.jpg" />
+              	</div>
+              </div>
+             
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="username"><i class="fa fa-user fa-fw" ></i></span>
+                    <input class="form-control" placeholder="Username" name="text" type="text" aria-label="username" aria-describedby="username" ng-model="user.email"/>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="fa fa-lock fa-fw" ></i></span>
+                    <input class="form-control" placeholder="Password" name="password" type="password"  aria-label="username" aria-describedby="password" ng-model="user.password"/>
+                  </div>
+                </div>
+
+                <div class="form-group text-left has-error">
+                  <div class="help-block" style="text-align:center;">
+                    <i class="lnr-"></i><span>{{error}}</span>
+                  </div>
+                </div>
+                <!-- Change this to a button or input when using this as a form -->
+                <button type="submit" class="btn btn-lg btn-primary btn-block"><i class="lnr lnr-rocket"></i> Login</button>
+           
+                <br />
+                <div class="text-center">
+                  <a ui-sref="landing" class="login-back-btn"><i class="lnr lnr-undo"></i> Back to home page</a>
+                </div>
+
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

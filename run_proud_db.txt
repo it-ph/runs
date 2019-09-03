@@ -1,0 +1,145 @@
+drop database if exists  run_proud;
+create database run_proud;
+
+use run_proud;
+
+create table users(
+	id int primary key auto_increment not null,
+	email varchar(255) not null unique,
+	fullname varchar(255) not null,
+	password varchar(255) not null,
+	accountNonLocked tinyint not null default 1,
+	accountNonExpired tinyint not null default 1,
+	credentialsNonExpired tinyint not null default 1,
+	enabled tinyint not null default 1,
+	role enum('ADMIN','USER') default 'USER',
+	createdAt datetime not null default CURRENT_TIMESTAMP,
+	updatedAt datetime
+);
+
+
+create table registrations(
+	id int primary key auto_increment not null,
+	email varchar(255) not null unique,
+	fullname varchar(255) not null,
+	password varchar(255) not null,
+	reg_status  tinyint not null default 0,
+	facility enum('AUSTIN','COIMBATORE','GURUGRAM','MANILA') not null,
+	createdAt dateTime not null default CURRENT_TIMESTAMP,
+	updatedAt dateTime
+);
+
+
+
+
+create table run_events(
+	id int primary key auto_increment not null,
+	reg_start dateTime not null,
+	reg_end dateTime not null,
+	run_start dateTime not null,
+	run_end dateTime,
+	createdAt dateTime not null default CURRENT_TIMESTAMP,
+	updatedAt dateTime
+);
+
+
+create table event_categories(
+	id int primary key auto_increment not null,
+	category varchar(255) not null unique,
+	categ_desc varchar(255),
+	createdAt dateTime not null,
+	updatedAt dateTime
+);
+
+
+create table run_event_participants(
+	event_id int not null,
+	user_id int not null,
+	primary key(event_id,user_id),
+	foreign key(event_id) references run_events(id),
+	foreign key(user_id) references users(id),
+	createdAt dateTime not null default CURRENT_TIMESTAMP,
+	updatedAt dateTime
+);
+
+
+create table run_event_categories(
+	event_id int not null,
+	categ_id int not null,
+	primary key(event_id,categ_id),
+	foreign key(categ_id) references event_categories(id),
+	foreign key(event_id) references run_events(id),
+	createdAt dateTime not null default CURRENT_TIMESTAMP,
+	updatedAt dateTime
+);
+
+create table run_progress(
+	id int primary key auto_increment not null,
+	user_id int not null,
+	event_id int not null,
+	categ_id int not null,
+	file_path varchar(255) not null,
+	file_name varchar(255) not null unique,
+	run_time time not null,
+	run_distance float not null,
+	verified enum('NO','VERIFIED','INVALID') default 'NO',
+	foreign key(user_id) references users(id),
+	foreign key(event_id) references run_events(id),
+        foreign key(categ_id) references event_categories(id),
+	createdAt dateTime not null default CURRENT_TIMESTAMP,
+	updatedAt dateTime
+);
+
+create table notifications(
+	id int primary key auto_increment not null,
+	title varchar(255) not null,
+	body varchar(255) not null,
+        recipient int not null,
+	click_action varchar(255) not null,
+	viewed tinyint default 0 not null,
+        foreign key (recipient) references users(id),
+	createdAt dateTime ,
+	updatedAt dateTime
+);
+
+
+
+INSERT INTO users(fullname,email,password,role) VALUES( 'IT Admin','itph@personiv.com', '$2a$10$d7r5K6Y8osC9rJHMOSjsB.xY5WtzFjLb0JSKrMSbhpeAkuUWM3gzm','ADMIN'); -- !Welcome18
+
+INSERT INTO run_events(reg_start,reg_end,run_start,run_end) VALUES('2019-07-01 00:00:00','2019-07-31 00:00:00','2019-08-01 00:00:00','2018-08-31 00:00:00');
+
+
+
+create table run_event_reg(
+	event_id int not null,
+	categ_id int not null,
+	user_id int not null,
+	approved tinyint not null default 0,
+	shirt_size enum('XS','S','M','L','XL','XXL'),
+	primary key(event_id,categ_id,user_id),
+	foreign key(event_id) references run_events(id),
+	foreign key(categ_id) references event_categories(id),
+	foreign key(user_id) references users(id),
+	createdAt dateTime not null default CURRENT_TIMESTAMP,
+	updatedAt dateTime
+);
+
+create table run_event_request(
+	event_id int not null,
+	categ_id int not null,
+	user_id int not null,
+	approved tinyint not null default 0,
+	shirt_size enum('XS','S','M','L','XL','XXL'),
+	primary key(event_id,categ_id,user_id),
+	foreign key(event_id) references run_events(id),
+	foreign key(categ_id) references event_categories(id),
+	foreign key(user_id) references users(id),
+	createdAt dateTime not null default CURRENT_TIMESTAMP,
+	updatedAt dateTime
+);
+
+
+
+
+
+

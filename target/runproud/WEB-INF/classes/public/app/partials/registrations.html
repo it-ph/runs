@@ -1,0 +1,117 @@
+<!-- Page Content -->
+  <div id="page-wrapper">
+      <div class="container-fluid">
+      
+      	<div class="row">
+      	<div class="col-lg-12"></div>
+			<div class="col-lg-12">
+			
+				<div class="panel panel-custom">
+					<div class="panel-heading"><h3>User Registrations </h3></div>
+					<div class="panel-body">
+						  <div class ="page-search">
+								<span class="num-entries">Show<select ng-model="registrations.numPerPage" ng-options="page for page in registrations.numPerPageSelections" ng-change="registrations.numPageChange()"></select>
+									entries
+								</span>
+								<div class="search-box">
+									<div class="input-group">
+									        <input class="form-control search" type="text" placeholder="Search" ng-model="registrations.searchKeyword" ng-change="registrations.search()" />
+									        <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+								      </div>
+							     </div>
+							</div>
+						<div class="table-custom"> 
+				      		<table class="table table-hover table-striped table-bordered">
+				      			<thead>
+				      				<tr>
+				      					<th>Full name</th>
+										<th>Email</th>
+										<th>Gender</th>
+				      					<th>Facility</th>
+				      					<th>Approved</th>
+				      					<th>Date Created</th>
+				      					<th>Date Updated</th>
+				      				</tr>
+				      			</thead>
+				      			<tbody>
+				      				<tr ng-repeat ="reg in registrations.currentPageList">
+				      					<td class="dropdown table-item">
+							                  <span class="dropdown-toggle" data-toggle="dropdown">
+							                  		{{reg.fullname}}
+							                  </span>
+							                  
+							                  <ul class="dropdown-menu table-dropdown" >
+						                        <li ng-click="approve(reg)"  ng-if="!reg.approved" >
+						                        	
+						                        	<span><i class="fa fa-check fa-fw approve ok"></i> Approve</span>
+						                        </li>
+						                        <li ng-click="deleteUserReg(reg)">
+						                        	<span><i class="fa fa-times fa-fw error"></i> delete</span>
+						                        </li>
+						                       
+						                      </ul>
+				      					</td>
+										  <td>{{reg.email}}</td>
+										  <td>{{reg.gender}}</td>
+										  <td>{{reg.facility}}</td>
+				      					<td><span class="{{reg.approved? 'ok':'error'}}">{{reg.approved ? 'YES' : 'NO'}}</span></td>
+				      					<td>{{reg.createdAt | date}}</td>
+				      					<td>{{reg.updatedAt | date}}</td>
+				      				</tr>
+				      			</tbody>
+				      		</table>
+				      		<div uib-pagination class="custom-pagination" 
+				      			 total-items="registrations.totalItems" 
+				      			 ng-model="registrations.currentPage"
+				      			  max-size="registrations.maxSize" 
+				      			  boundary-links="true" 
+				      			  items-per-page="registrations.numPerPage" 
+				      			  ng-change="registrations.numPageChange()">
+ 
+			      		</div>
+		      		</div>
+	      		</div>
+      		</div>
+   		</div>
+      </div>
+      </div>
+      <!-- /.container-fluid -->
+  </div>
+  <!-- /#page-wrapper -->
+  
+    <div class="container text-center">
+	<div class="modal fade" role="dialog"   id="loading">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class='modal-body'>
+					<div style="text-align:center;">
+						<div class ="loader"></div>
+						<h3>Processing ...</h3>
+					</div>
+						
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container text-center">
+	<div class="modal fade" role="dialog"   id="confirm-delete">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+			<form ng-submit="deleteRecord()">
+				<div class='modal-body'>
+					<div style="text-align:center;">
+						<h3 >Are you sure you want to <span class="error">delete</span> this record?</h3>
+					</div>
+						
+					<div class="text-danger">{{error}}</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" type="submit">Yes</button><button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>

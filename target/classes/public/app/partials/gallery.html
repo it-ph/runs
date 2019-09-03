@@ -1,0 +1,594 @@
+
+	    <!-- Navigation -->
+	    <nav class="navbar navbar-default navbar-sticky" role="navigation" style="margin-bottom: 0">
+				<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" ui-sref="home"></a>
+				</div>
+				<!-- /.navbar-header -->
+
+			 <ul class="nav navbar-top-links navbar-right">
+				 <li ng-click="scroll()">
+									<span >HOME</span>
+			 </li>
+			 <li>
+				<a ui-sref="gallery">GALLERY</a>
+			</li>
+					 <li ng-click="scroll('.faqs')">
+						 <span>HOW IT WORKS</span>
+					 </li>
+					 <li ng-click="scroll('.stripes')">
+						 <span>CHOOSE YOUR CATEGORY</span>
+					 </li>
+					 <li ng-click="scroll('.entitlements')">
+						 <span>ENTITLEMENTS</span>
+					 </li>
+						<li >
+						 <a ui-sref="login">LOGIN</a>
+					 </li>
+					 <li>
+						 <a ui-sref="register">REGISTER</a>
+					 </li>
+			</ul>
+
+		</nav>
+	 <!-- /Navigation -->  
+	 
+<div class="container-fluid">
+ <div class="countdown home">
+	<h1>{{countRemaining.event_msg}}</h1>
+	<div class="row">
+		<div class="time-card">
+			<div class="number">{{countRemaining.days}}</div>
+			<div>days</div>
+		</div>
+		<div class="time-card">
+			<div class="number">{{countRemaining.hours}}</div>
+			<div>hours</div>
+		</div>
+		<div class="time-card">
+			<div class="number">{{countRemaining.minutes}}</div>
+			<div>minutes</div>
+		</div>
+		<div class="time-card">
+			<div class="number">{{countRemaining.seconds}}</div>
+			<div>seconds</div>
+		</div>
+	</div>
+		
+</div>
+ <div class='row'> 
+				<div class="col-md-8 col-md-offset-2">
+			
+		<div class="panel panel-custom">
+			<div class="panel-heading"><h3>Leaderboards </h3></div>
+			<div class="panel-body">
+						<ul class="nav nav-pills"> 
+							<li class="active"><span data-toggle="tab" data-target="#all-facility">ALL</span></li>
+							<li><span data-toggle="tab" data-target="#austin">AUSTIN</span></li>
+					<li><span data-toggle="tab" data-target="#coimbatore" >COIMBATORE</span></li>
+					<li><span data-toggle="tab" data-target="#gurugram">GURUGRAM</span></li>					
+					<li><span data-toggle="tab" data-target="#manila">MANILA</span></li>
+		
+				</ul>
+				<div class="tab-content">
+				<div id="all-facility" class="tab-pane fade in active">
+						<br/>
+					 <div class ="page-search">
+						<span class="num-entries">Show<select ng-model="all_run_progress.numPerPage" ng-options="page for page in all_run_progress.numPerPageSelections" ng-change="all_run_progress.numPageChange()"></select>
+							entries
+						</span>
+						<div style="margin-top:10px">
+							<div class="page-search">
+								<span class="num-entries">
+									Show
+									<select ng-model="all_run_progress.category"  
+											ng-options="categ for categ in all_run_progress.categories" 
+											ng-change="all_run_progress.filterByCategory()">
+									</select>
+									Category
+								</span>
+								
+							</div>
+						</div>
+						<!-- <div style="margin-top:10px">
+								<div class="page-search">
+									<span class="num-entries">
+										Show
+										<select ng-model="all_run_progress.gender"  
+												ng-options="gender for gender in all_run_progress.genders" 
+												ng-change="all_run_progress.filterByGender()">
+										</select>
+										Gender
+									</span>
+									
+								</div>
+							</div> -->
+						<div class="table-custom"> 
+							<table class="table table-hover table-striped table-bordered">
+								 <thead>
+									 <tr>
+										 <th>Name</th>
+										 <th>Distance (Km)</th>
+										 <th>Duration</th>
+										 <th>Category</th>
+										 <th>Pace</th>
+									 </tr>
+								 </thead>
+								 <tbody>
+									 <tr ng-repeat="all_rec in all_run_progress.currentPageList">
+										 <td class="table-item">
+													 {{all_rec.user.fullname}}
+											</td>
+										 <td>
+											 {{all_rec.distanceTraveled}}
+										 </td>
+										 <td>{{all_rec.totalElapseTime}}</td>
+										 <td>{{all_rec.eventCategory.category}}</td>
+										 <td>{{all_rec.pace}}</td>
+									 </tr>
+								 
+								 </tbody>
+							 </table>
+							 </div>
+							 <div uib-pagination class="custom-pagination" 
+											 total-items="all_run_progress.totalItems" 
+											 ng-model="all_run_progress.currentPage"
+												max-size="all_run_progress.maxSize" 
+												boundary-links="true" 
+												items-per-page="all_run_progress.numPerPage" 
+												ng-change="all_run_progress.numPageChange()">
+				
+								</div>
+						</div>
+					</div>
+					<div id="austin" class="tab-pane fade in">
+						<br/>
+					 <div class ="page-search">
+						<span class="num-entries">Show<select ng-model="austin_run_progress.numPerPage" ng-options="page for page in austin_run_progress.numPerPageSelections" ng-change="austin_run_progress.numPageChange()"></select>
+							entries
+						</span>
+						<div style="margin-top:10px">
+							<div class="page-search">
+								<span class="num-entries">
+									Show
+									<select ng-model="austin_run_progress.category"  
+											ng-options="categ for categ in austin_run_progress.categories" 
+											ng-change="austin_run_progress.filterByCategory()">
+									</select>
+									Category
+								</span>
+								
+							</div>
+						</div>
+						
+						<h3>Facility Challenge Progress {{austin_run_progress.facilityProgressPercent.percentFac}} (Run: {{austin_run_progress.facilityProgressPercent.runs}} / {{austin_run_progress.facilityProgressPercent.orun}} | Bike: {{ austin_run_progress.facilityProgressPercent.bike}} / {{ austin_run_progress.facilityProgressPercent.obike}})  </h3>
+							
+						<h3>Overall Progress {{austin_run_progress.facilityProgressPercent.percent}}% ({{austin_run_progress.facilityProgressPercent.totalUserDistance ? austin_run_progress.facilityProgressPercent.totalUserDistance : 0}} / {{austin_run_progress.facilityProgressPercent.totalCategoryDistance}})  </h3>
+						<div class="progress">
+							<div class="progress-bar default-color" role="progressbar" 
+								aria-valuemin="0" aria-valuemax="100" style="width:{{austin_run_progress.facilityProgressPercent.percent}}%">
+							</div>
+							</div>
+						
+						<div class="table-custom"> 
+							<table class="table table-hover table-striped table-bordered">
+								 <thead>
+									 <tr>
+										 <th>Name</th>
+										 <th>Distance (Km)</th>
+										 <th>Duration</th>
+										 <th>Category</th>
+										 <th>Pace</th>
+									 </tr>
+								 </thead>
+								 <tbody>
+									 <tr ng-repeat="austin_rec in austin_run_progress.currentPageList">
+										 <td class="table-item">
+													 {{austin_rec.user.fullname}}
+											</td>
+										 <td>
+											 {{austin_rec.distanceTraveled}}
+										 </td>
+										 <td>{{austin_rec.totalElapseTime}}</td>
+										 <td>{{austin_rec.eventCategory.category}}</td>
+										 <td>{{austin_rec.pace}}</td>
+									 </tr>
+								 
+								 </tbody>
+							 </table>
+							 </div>
+							 <div uib-pagination class="custom-pagination" 
+											 total-items="austin_run_progress.totalItems" 
+											 ng-model="austin_run_progress.currentPage"
+												max-size="austin_run_progress.maxSize" 
+												boundary-links="true" 
+												items-per-page="austin_run_progress.numPerPage" 
+												ng-change="austin_run_progress.numPageChange()">
+				
+								</div>
+						</div>
+					</div>
+					<div id="coimbatore" class="tab-pane fade in">
+						<br/>
+					 <div class ="page-search">
+						<span class="num-entries">Show<select ng-model="coimbatore_run_progress.numPerPage" ng-options="page for page in coimbatore_run_progress.numPerPageSelections" ng-change="coimbatore_run_progress.numPageChange()"></select>
+							entries
+						</span>
+						<div style="margin-top:10px">
+							<div class="page-search">
+								<span class="num-entries">
+									Show
+									<select ng-model="coimbatore_run_progress.category"  
+											ng-options="categ for categ in coimbatore_run_progress.categories" 
+											ng-change="coimbatore_run_progress.filterByCategory()">
+									</select>
+									Category
+								</span>
+								
+							</div>
+						</div>
+						<h3>Facility Challenge Progress {{coimbatore_run_progress.facilityProgressPercent.percentFac}} (Run: {{coimbatore_run_progress.facilityProgressPercent.runs}} / {{coimbatore_run_progress.facilityProgressPercent.orun}} | Bike: {{ coimbatore_run_progress.facilityProgressPercent.bike}} / {{ coimbatore_run_progress.facilityProgressPercent.obike}})  </h3>
+						
+						<h3>Overall Progress {{coimbatore_run_progress.facilityProgressPercent.percent}}% ({{coimbatore_run_progress.facilityProgressPercent.totalUserDistance ? coimbatore_run_progress.facilityProgressPercent.totalUserDistance : 0}} / {{coimbatore_run_progress.facilityProgressPercent.totalCategoryDistance}})  </h3>
+						<div class="progress">
+							<div class="progress-bar default-color" role="progressbar" 
+								aria-valuemin="0" aria-valuemax="100" style="width:{{coimbatore_run_progress.facilityProgressPercent.percent}}%">
+							</div>
+						</div>
+						<div class="table-custom"> 
+							<table class="table table-hover table-striped table-bordered">
+								 <thead>
+									 <tr>
+										 <th>Name</th>
+										 <th>Distance (Km)</th>
+										 <th>Duration</th>
+										 <th>Category</th>
+										 <th>Pace</th>
+									 </tr>
+								 </thead>
+								 <tbody>
+									 <tr ng-repeat="coimbatore_rec in coimbatore_run_progress.currentPageList">
+										 <td class="table-item">
+														 {{coimbatore_rec.user.fullname}}
+											</td>
+										 <td>
+											 {{coimbatore_rec.distanceTraveled}}
+										 </td>
+										 <td>{{coimbatore_rec.totalElapseTime}}</td>
+										 <td>{{coimbatore_rec.eventCategory.category}}</td>
+										 <td>{{coimbatore_rec.pace}}</td>
+									 </tr>
+								 
+								 </tbody>
+							 </table>
+							 </div>
+							 <div uib-pagination class="custom-pagination" 
+											 total-items="coimbatore_run_progress.totalItems" 
+											 ng-model="coimbatore_run_progress.currentPage"
+												max-size="coimbatore_run_progress.maxSize" 
+												boundary-links="true" 
+												items-per-page="coimbatore_run_progress.numPerPage" 
+												ng-change="coimbatore_run_progress.numPageChange()">
+				
+								</div>
+						</div>
+					</div>
+					<div id="gurugram" class="tab-pane fade in">
+							<br/>
+							 <div class ="page-search">
+						<span class="num-entries">Show<select ng-model="gurugram_run_progress.numPerPage" ng-options="page for page in gurugram_run_progress.numPerPageSelections" ng-change="gurugram_run_progress.numPageChange()"></select>
+							entries
+						</span>
+						<div style="margin-top:10px">
+							<div class="page-search">
+								<span class="num-entries">
+									Show
+									<select ng-model="gurugram_run_progress.category"  
+											ng-options="categ for categ in gurugram_run_progress.categories" 
+											ng-change="gurugram_run_progress.filterByCategory()">
+									</select>
+									Category
+								</span>
+								
+							</div>
+						</div>
+						<h3>Facility Challenge Progress {{gurugram_run_progress.facilityProgressPercent.percentFac}} (Run: {{gurugram_run_progress.facilityProgressPercent.runs}} / {{gurugram_run_progress.facilityProgressPercent.orun}} | Bike: {{ gurugram_run_progress.facilityProgressPercent.bike}} / {{ gurugram_run_progress.facilityProgressPercent.obike}})  </h3>
+							
+						<h3>Overall Progress {{gurugram_run_progress.facilityProgressPercent.percent}}% ({{gurugram_run_progress.facilityProgressPercent.totalUserDistance ? gurugram_run_progress.facilityProgressPercent.totalUserDistance : 0}} / {{gurugram_run_progress.facilityProgressPercent.totalCategoryDistance}})  </h3>
+						<div class="progress">
+							<div class="progress-bar default-color" role="progressbar" 
+								aria-valuemin="0" aria-valuemax="100" style="width:{{gurugram_run_progress.facilityProgressPercent.percent}}%">
+							</div>
+							</div>
+						<div class="table-custom"> 
+							<table class="table table-hover table-striped table-bordered">
+								 <thead>
+									 <tr>
+										 <th>Name</th>
+										 <th>Distance (Km)</th>
+										 <th>Duration</th>
+										 <th>Category</th>
+										 <th>Pace</th>
+									 </tr>
+								 </thead>
+								 <tbody>
+									 <tr ng-repeat="gurugram_rec in gurugram_run_progress.currentPageList">
+										 <td class="table-item">
+														 {{gurugram_rec.user.fullname}}
+											</td>
+										 <td>{{gurugram_rec.distanceTraveled}}</td>
+										 <td>{{gurugram_rec.totalElapseTime}}</td>
+										 <td>{{gurugram_rec.eventCategory.category}}</td>
+										 <td>{{gurugram_rec.pace}}</td>
+									 </tr>
+								 
+								 </tbody>
+							 </table>
+							 </div>
+							 <div uib-pagination class="custom-pagination" 
+											 total-items="gurugram_run_progress.totalItems" 
+											 ng-model="gurugram_run_progress.currentPage"
+												max-size="gurugram_run_progress.maxSize" 
+												boundary-links="true" 
+												items-per-page="gurugram_run_progress.numPerPage" 
+												ng-change="gurugram_run_progress.numPageChange()">
+				
+								</div>
+						</div>
+					</div>
+					<div id="manila" class="tab-pane fade in">
+						<br/>
+							 <div class ="page-search">
+						<span class="num-entries">Show<select ng-model="manila_run_progress.numPerPage" ng-options="page for page in manila_run_progress.numPerPageSelections" ng-change="manila_run_progress.numPageChange()"></select>
+							entries
+						</span>
+						<div style="margin-top:10px">
+							<div class="page-search">
+								<span class="num-entries">
+									Show
+									<select ng-model="manila_run_progress.category"  
+											ng-options="categ for categ in manila_run_progress.categories" 
+											ng-change="manila_run_progress.filterByCategory()">
+									</select>
+									Category
+								</span>
+								
+							</div>
+						</div>
+						<h3>Facility Challenge Progress {{manila_run_progress.facilityProgressPercent.percentFac}} (Run: {{manila_run_progress.facilityProgressPercent.runs}} / {{manila_run_progress.facilityProgressPercent.orun}} | Bike: {{ manila_run_progress.facilityProgressPercent.bike}} / {{ manila_run_progress.facilityProgressPercent.obike}})  </h3>
+								
+						<h3>Overall Progress {{manila_run_progress.facilityProgressPercent.percent}}% ({{manila_run_progress.facilityProgressPercent.totalUserDistance ? manila_run_progress.facilityProgressPercent.totalUserDistance : 0}} / {{manila_run_progress.facilityProgressPercent.totalCategoryDistance}})  </h3>
+								<div class="progress">
+							<div class="progress-bar default-color" role="progressbar" 
+								aria-valuemin="0" aria-valuemax="100" style="width:{{manila_run_progress.facilityProgressPercent.percent}}%">
+							</div>
+						</div>
+						<div class="table-custom"> 
+							<table class="table table-hover table-striped table-bordered">
+								 <thead>
+									 <tr>
+										 <th>Name</th>
+										 <th>Distance (Km)</th>
+										 <th>Duration</th>
+										 <th>Category</th>
+										 <th>Pace</th>
+									 </tr>
+								 </thead>
+								 <tbody>
+									 <tr ng-repeat="manila_rec in manila_run_progress.currentPageList">
+										 <td class="dropdown table-item">
+														 {{manila_rec.user.fullname}}
+											</td>
+										 <td>{{manila_rec.distanceTraveled}}</td>
+										 <td>{{manila_rec.totalElapseTime}}</td>
+										 <td>{{manila_rec.eventCategory.category}}</td>
+										 <td>{{manila_rec.pace}}</td>
+									 </tr>
+								 
+								 </tbody>
+							 </table>
+							 </div>
+							 <div uib-pagination class="custom-pagination" 
+											 total-items="manila_run_progress.totalItems" 
+											 ng-model="manila_run_progress.currentPage"
+												max-size="manila_run_progress.maxSize" 
+												boundary-links="true" 
+												items-per-page="manila_run_progress.numPerPage" 
+												ng-change="manila_run_progress.numPageChange()">
+				
+								</div>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+ <div class="content main">
+	 
+ </div>
+	
+ <div class="content faqs">
+	
+
+	 <div class="row">
+	 <div class="col-md-8 col-md-offset-2">
+			<!-- <br><br> -->
+		<div class="row text-center">
+			<div class="col-md-offset-2 col-md-8 text-center">
+				<!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"> -->
+						<!-- Indicators -->
+						
+						
+						<!-- Wrapper for slides -->
+						<!-- <div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<img src="/uploads/1" alt="...">
+							<div class="carousel-caption">
+								...
+							</div>
+							</div>
+							
+							<div class="item" ng-repeat="all_rec in records.currentPageList" ng-if="($index+1)!=1">
+
+							<img src="/uploads/{{$index+1}}" alt="...">
+							<div class="carousel-caption">
+								
+							
+							</div>
+							</div>
+							<div class="item" ng-repeat="all_rec in records.currentPageList">
+								<img src="/upload/{{$index+1}}" alt="...">
+								<div class="carousel-caption">
+							
+								</div>
+								</div>
+							
+						</div> -->
+						
+						<!-- Controls -->
+						<!-- <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+						</div>
+				</div> -->
+				
+		</div><!--row-->
+		<br><br>
+		 <h1>HOW IT WORKS</h1>
+		 <div class="title-separator"></div>
+		 <div class="faq-title">WHAT WILL I DO TO PARTICIPATE?</div>
+		 <p class="faq-ans">Register an account, track and record your run or ride session; take a screenshot of your session and upload it on your <a ui-sref="#">RunProud.Personiv.com</a> account together with a selfie taken after each activity. Uploads should be done weekly on or before Monday of the following week for the submission to be approved.</p>
+		 
+		 <div class="faq-title">REGISTRATION PERIOD</div>
+		 <p class="faq-ans">August 1 to August 31, 2019</p>
+		 
+		 <div class="faq-title">RUN PERIOD</div>
+		 <p class="faq-ans">Setp 1, 2019 to Sept 30, 2019</p>
+		 
+		 <div class="faq-title">REGISTRATION PROCEDURE</div>
+		 <p class="faq-ans">Registration payment will be handled per site and can be via salary deduction following the site's agreed terms (e.g. one payment, 2 cutoffs, etc).  Register and create an account by clicking the <a ui-sref="register">REGISTER</a> button at the start of the RunProud website. Update your profile and race preferences in the website.
+		 <p>
+		 
+		 <div class="faq-title">REGISTRATION FEE</div>
+		 <p class="faq-ans">Registration fee will be dependent per site. Announcements will be made per facility. Fee is inclusive of a finisher shirt/s and other entitlements approved by your facility. One registration fee for any activity (Run Proud only, Ride Proud only or Duathlon) and no refunds allowed.<p>
+		 
+		 
+		 <div class="faq-title">WHAT RUNNING APPLICATIONS SHOULD I USE FOR LOGGING MY RUN?</div>
+		 <p class="faq-ans">We are requiring all participants to use an app that can track running and biking like Strava. This will allow us to monitor your progress for both run & ride in one app. Road, Trail and Indoor activities are accepted as long as the run & ride session is recorded (upload a photo of the distance recorded in the treadmill or stationary bike).<p>
+		 
+		<div class="faq-title">HOW DO I SUBMIT MY DAILY/WEEKLY RUN PROOF?</div>
+		 <p class="faq-ans">You need to register with an email (personal or company email) and password, and you can submit your run sessions on a weekly basis by logging in on our web app. Screenshot should display duration, distance (in kilometers), time, and date together with a selfie after each activity.<p>
+		 
+		 <div class="faq-title">WHEN CAN I RECEIVE MY ENTITLEMENTS?</div>
+		 <p class="faq-ans">Entitlements can be received 15 to 30 days after the race ends. The entitlements will be handled per site.<p>
+		
+		<div class="faq-title">WHAT ARE THE RUN PROUD REQUIREMENTS?</div>
+		<p class="faq-ans">Run 160 KM within the month of Sept 2019 and get a Run Proud T-Shirt plus other entitlements per facility<p>
+
+		<div class="faq-title">WHAT ARE THE RIDE PROUD REQUIREMENTS?</div>
+		<p class="faq-ans">Bike 300 KM within the month of Sept 2019 and get a Ride Proud T-Shirt plus other entitlements per facility<p>
+
+		<div class="faq-title">WHAT ARE THE PERSONIV VIRTUAL DUATHLON REQUIREMENTS?</div>
+		<p class="faq-ans">1. Run a minimum of 40KM by Sept 16<p>
+		<p class="faq-ans">2. Run 160 KM by end of Sept 2019<p>
+		<p class="faq-ans">3. Bike 300 KM within the month of Sept 2019<p>
+		<p class="faq-ans">To get a Run Proud, Ride Proud and Personiv Duathlon T-Shirts plus other entitlements per facility<p>
+	 
+	 </div>
+	</div>
+ </div>
+ <div  class="content stripes">
+	 <h1>CHOOSE YOUR CATEGORY</h1>
+		 <div class="title-separator"></div>
+	 <div class="stripe-content">
+		 <div class="stripe-container">
+			 <div class="stripe">
+				 <img src="/app/img/landing/run.jpg" />
+			 </div>
+			 
+		 </div>
+		 <div  class="stripe-container">
+			 <div class="stripe">
+				 <img src="/app/img/landing/bike.jpg" />
+			 </div>
+			 
+		 </div>
+	 
+		 <div  class="stripe-container">
+			 <div class="stripe">
+				 <img src="/app/img/landing/duathlon.jpg" />
+			 </div>
+		 
+		 </div>
+		 
+	 </div>
+ </div>
+ <div  class="content entitlements">
+		 <h1>ENTITLEMENTS</h1>
+			 <div class="title-separator"></div>
+		 <div class="row">
+				<div class="entitlements-content">
+						<img src="/app/img/landing/ent.jpg" />
+						
+					
+					</div>
+					<div class="entitlements-content">
+							<img src="/app/img/landing/facility.jpg" />
+							
+						
+						</div>
+				<!-- <div class="entitlements-content">
+				 <img src="/app/img/tshirt front.jpg" />
+				 
+				 <div class="ent-caption">Finisher's shirt (front)</div>
+			 </div>
+			 <div class="entitlements-content">
+				 <img src="/app/img/tshirt back.jpg" />
+				 
+				 <div class="ent-caption">Finisher's shirt (back)</div>
+			 </div>
+				<div class="entitlements-content">
+				 <img src="/app/img/landing/medal range 1 blitz.jpg" />
+				 
+				 <div class="ent-caption">RANGE I BLITZ Finisher's medal</div>
+			 </div>
+			 <div class="entitlements-content">
+				 <img src="/app/img/landing/medal range 2 blitz.jpg" />
+				 
+				 <div class="ent-caption">RANGE II BLITZ Finisher's medal</div>
+			 </div>
+			 <div class="entitlements-content">
+				 <img src="/app/img/landing/medal range 2.jpg" />
+				 
+				 <div class="ent-caption">RANGE II Finisher's medal</div>
+			 </div>
+			 <div class="entitlements-content">
+				 <img src="/app/img/landing/medal range 3.jpg" />
+				 
+				 <div class="ent-caption">RANGE III Finisher's medal</div>
+			 </div>
+			 <div class="entitlements-content">
+				 <img src="/app/img/landing/medals.jpg" />
+				 
+				 <div class="ent-caption">Finisher's medals</div>
+			 </div>
+			 <div class="entitlements-content">
+				 <img src="/app/img/landing/sticker.jpg" />
+				 
+				 <div class="ent-caption">Sticker (freebie)</div>
+			 </div> -->
+		</div>
+		</div>
+</div>

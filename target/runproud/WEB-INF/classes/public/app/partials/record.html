@@ -1,0 +1,149 @@
+
+
+   
+  <!-- Page Content -->
+  <div id="page-wrapper">
+      <div class="container-fluid">
+      	
+		
+			<div class="row">
+				<div class="col-lg-12">
+				
+					<div class="panel panel-custom">
+						<div class="panel-heading"><h3>Submitted Records </h3></div>
+						<div class="panel-body">
+							  <div class ="page-search">
+									<span class="num-entries">Show<select ng-model="records.numPerPage" ng-options="page for page in records.numPerPageSelections" ng-change="records.numPageChange()"></select>
+										entries
+									</span>
+									<div class="search-box">
+										<div class="input-group">
+									        <input class="form-control search" type="text" placeholder="Search" ng-model="records.searchKeyword" ng-change="records.search()" />
+									        <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+							      		</div>
+									</div>
+									
+							   	</div>
+							<div class="table-custom"> 
+								<table class="table table-hover table-striped table-bordered">
+						   			<thead>
+						   				<tr>
+						   					<th>Runner</th>
+						   					<th>Distance (Km)</th>
+						   					<th>Duration</th>
+											   <th>Verified</th>
+											   <th>Attachment Category</th>
+											   <th>Attachment [ Actual ]</th>
+											   <th>Attachment [Activity Photo]</th>
+						   					<th>Date</th>
+						   				</tr>
+						   			</thead>
+						   			<tbody>
+						   				<tr ng-repeat ="run in records.currentPageList">
+						   					
+						   					<td class="dropdown table-item">
+								                  <span class="dropdown-toggle" data-toggle="dropdown">
+								                  		{{run.user.fullname}}
+								                  </span>
+								                
+								                  <ul class="dropdown-menu table-dropdown"  ng-if="run.verified !='INVALID'">
+							                        <li ng-click="approve(run)" ng-if="run.verified =='NO'">
+							                        	<span><i class="fa fa-check fa-fw ok"></i> Approve</span>
+							                        </li>
+							                        <li ng-click="dissaprove(run)" ng-if="run.verified =='VERIFIED' || run.verified =='NO'">
+							                        	 <span><i class="fa fa-times fa-fw error"></i> Disapprove</span>		                       
+							                        </li>
+							                      </ul>
+							                      
+					      					</td>
+					      					<td>{{run.distance}}</td>
+					      					<td >{{run.time }}</td>
+											   <td><span class="{{run.verified=='NO'? 'text-warning': run.verified=='VERIFIED'? 'ok': 'error'}}">{{run.verified}}</span></td>
+											   <td>{{run.categ}}</td>
+											   <td class="table-item" ng-click='showAttachment(run)'>view attachment</td>
+											   <td class="table-item" ng-click='showAttachments(run)'>view attachment</td>
+						   					<td>{{run.createdAt | date}}</td>
+						   				</tr>
+						   			</tbody>
+						   		</table>
+						   		<div uib-pagination class="custom-pagination" 
+						      			 total-items="records.totalItems" 
+						      			 ng-model="records.currentPage"
+						      			  max-size="records.maxSize" 
+						      			  boundary-links="true" 
+						      			  items-per-page="records.numPerPage" 
+						      			  ng-change="records.numPageChange()">
+					
+					      		</div>
+					   		</div>
+						</div>
+				</div>
+				
+				</div>
+				
+			</div>
+	
+   		</div>
+      <!-- /.container-fluid -->
+      </div>
+      
+  <div class="container text-center">
+	<div class="modal fade" role="dialog"   id="img-attach">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header modal-custom">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class='modal-body'>
+				
+						<img ng-src="/uploads/{{selectedRecord.id}}"/>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+  <div class="container text-center" >
+	<div class="modal fade" role="dialog"   id="submit-status" style="margin-top:10%;">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class='modal-body'>
+				
+						<div class="{{submit.error ? 'ok': 'error'}}">{{submit.message}}</div>
+						
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container text-center">
+	<div class="modal fade" role="dialog"   id="img-attachs">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header modal-custom">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class='modal-body'>
+				
+						<img ng-src="/upload/{{selectedRecord.id}}"/>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+  <div class="container text-center" >
+	<div class="modal fade" role="dialog"   id="submit-status" style="margin-top:10%;">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class='modal-body'>
+				
+						<div class="{{submit.error ? 'ok': 'error'}}">{{submit.message}}</div>
+						
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

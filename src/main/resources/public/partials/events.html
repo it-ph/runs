@@ -1,0 +1,77 @@
+<!-- Page Content -->
+  <div id="page-wrapper">
+      <div class="container-fluid">
+      
+      	<div class="row">
+      	<div class="col-lg-12"></div>
+			<div class="col-lg-12">
+			
+				<div class="panel panel-custom">
+					<div class="panel-heading"><h3>Run Events </h3></div>
+					<div class="panel-body">
+						  <div class ="page-search">
+								<span class="num-entries">Show<select ng-model="events.numPerPage" ng-options="page for page in events.numPerPageSelections" ng-change="events.numPageChange()"></select>
+									entries
+								</span>
+								<div class="search-box">
+									<div class="input-group">
+									        <input class="form-control search" type="text" placeholder="Search" ng-model="events.searchKeyword" ng-change="events.search()" />
+									        <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+								      </div>
+							     </div>
+							</div>
+						<div class="table-custom"> 
+				      		<table class="table table-hover table-striped table-bordered">
+				      			<thead>
+				      				<tr>
+				      					<th>#</th>
+				      					<th>Registration Start</th>
+				      					<th>Registration End</th>
+				      					<th>Run Start</th>
+				      					<th>Run End</th>
+				      					<th>Date Created</th>
+				      					<th>Date Updated</th>
+				      				</tr>
+				      			</thead>
+				      			<tbody>
+				      				<tr ng-repeat ="event in events.currentPageList">
+				      					<td class="dropdown table-item">
+							                  <span class="dropdown-toggle" data-toggle="dropdown">
+							                  		{{event.id}}
+							                  </span>
+							                  
+							                  <ul class="dropdown-menu table-dropdown" >
+						                        <li ng-if="false"> 
+						                        	<span><i class="fa fa-pencil fa-fw ok"></i> edit</span>
+						                        </li>
+						                        <li ng-click="viewParticipants(event)">
+						                        	<span><i class="fa fa-eye fa-fw ok"></i> view participants</span>
+						                        </li>
+						                      </ul>
+				      					</td>
+				      					<td>{{event.regStart | date}}</td>
+				      					<td>{{event.regEnd | date}}</td>
+				      					<td>{{event.runStart | date}}</td>
+				      					<td>{{event.runEnd | date}}</td>
+				      					<td>{{event.createdAt | date}}</td>
+				      					<td>{{event.updatedAt | date}}</td>
+				      				</tr>
+				      			</tbody>
+				      		</table>
+				      		<div uib-pagination class="custom-pagination" 
+				      			 total-items="events.totalItems" 
+				      			 ng-model="events.currentPage"
+				      			  max-size="events.maxSize" 
+				      			  boundary-links="true" 
+				      			  items-per-page="events.numPerPage" 
+				      			  ng-change="events.numPageChange()">
+ 
+			      		</div>
+		      		</div>
+	      		</div>
+      		</div>
+   		</div>
+      </div>
+      </div>
+      <!-- /.container-fluid -->
+  </div>

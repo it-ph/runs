@@ -1,0 +1,26 @@
+{
+  "hints": [],
+  "groups": [],
+  "properties": [
+    {
+      "name": "jwt.client",
+      "description": "A description for 'jwt.client'",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "jwt.expiration",
+      "description": "A description for 'jwt.expiration'",
+      "type": "java.lang.Long"
+    },
+    {
+      "name": "jwt.secret",
+      "description": "A description for 'jwt.secret'",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "mail-receiver",
+      "description": "A description for 'receiver-mail'",
+      "type": "java.lang.String"
+    }
+  ]
+}

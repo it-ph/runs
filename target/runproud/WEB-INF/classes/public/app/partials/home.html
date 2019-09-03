@@ -1,0 +1,245 @@
+<!-- Page Content -->
+  <div id="page-wrapper">
+      <div class="container-fluid">
+      
+			<div class="row" ng-if="runEventReg">
+				<div class="col-lg-12">
+					<div class="panel panel-custom" ng-if="runEventReg.approved">
+							
+						<div class="panel-body">	
+							<h3>Run Progress ({{userProgress.distanceTraveled ? userProgress.distanceTraveled : 0}} / {{runEventReg.eventCateg.distance}})  </h3>
+					      	<div class="progress">
+							  <div class="progress-bar default-color" role="progressbar" 
+							  	aria-valuemin="0" aria-valuemax="100" style="width:{{userProgress.percent}}%">
+							  </div>
+							</div>
+							<div><strong>Run Period : </strong>{{runEventReg.runEvent.runStart | date}} - {{runEventReg.runEvent.runEnd | date}}</div>
+							<div><strong>Category : </strong>{{runEventReg.eventCateg.category}}</div>
+							<div><strong>Total Elapse Time : </strong> {{userProgress.totalElapseTime ? userProgress.totalElapseTime : '00:00:00'}}</div>
+							
+						</div>
+					
+					</div>
+					<div class="panel panel-custom" ng-if="!runEventReg.approved">
+						<div class="panel-body">	
+							<h3>Registration submitted. Waiting for approval </h3>
+					      
+						</div>
+					
+					</div>
+				</div>
+			</div>
+	
+			<div class="row" ng-if="canRegister()">
+				<div class="col-lg-12">
+					<div class="panel panel-custom">
+					  <div class="panel-heading"><h3>Register </h3></div>
+					   <form role="form" ng-submit="registerRun()">
+				
+						<div class="panel-body">	
+							<fieldset>
+							
+								<div class="form-group">
+										
+									<div class="col-sm-10">
+										<div class="form-control form-inline">{{currentRun.regStart | date}} - {{currentRun.regEnd | date}}</div>
+									</div>
+								
+								</div>
+								<div class="form-group">
+									<label  class="control-label col-sm-2">Registration Period</label>
+									<div class="col-sm-10">
+										<div class="form-control form-inline">{{currentRun.runStart | date}} - {{currentRun.runEnd | date}}</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-sm-2">Run Period</label>
+									<div class="col-sm-10">
+										<select class="form-control form-inline" ng-model="battles.selected" ng-options="battles.category + '('+ battles.description +') ' for battles in battles.list">
+										
+										</select>
+									</div>
+									
+								</div>
+								<div class="form-group">
+									
+									<label class="control-label col-sm-2">Choose your category</label>
+									
+									<div class="col-sm-10">
+											<select class="form-control form-inline"  ng-model="shirtSize.selected" ng-options="shirt.name +' ('+shirt.desc+')' for shirt in shirtSize.list"></select>
+									</div>
+								</div>
+							
+								<div class="form-group">
+									
+									<label class="control-label col-sm-2">Select your finisher shirt size</label>
+									<div class="col-sm-10">
+										
+								 	</div>
+								</div>
+								<div class="form-group" >
+									<br><br>
+									<div class="col-sm-10">
+											<input type="checkbox" class="form-inline custom-chkbox" ng-model="regDetail.auth"/>
+										</div>
+								
+										<p class="control-label col-sm-12">By checking this box you agree that your data will be used by the organizer in relation to the virtual event. You confirm that you are in good health condition to participate and releases the organizer from any claims or liabilities of any kind arising out of your participation. You agree to pay the event fee required by your facility and mode of payment. This also serves as your consent for an automatic salary deduction if required by your facility.</p>
+										
+										
+								</div>
+							</fieldset>
+								
+							
+					     
+						</div>
+						<div class="modal-footer">
+							<input class="btn btn-custom" type="submit"  value="Register" ng-disabled="registerDisabled()"/>
+						</div>
+					  </form>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+				
+					<div class="panel panel-custom">
+						<div class="panel-heading"><h3>Submitted Records </h3></div>
+						<div class="panel-body">
+							  <div class ="page-search">
+									<span class="num-entries">Show<select ng-model="records.numPerPage" ng-options="page for page in records.numPerPageSelections" ng-change="records.numPageChange()"></select>
+										entries
+									</span>
+									
+									<button class="btn btn-custom" ng-click="showUploadModal()" ng-if="canAddRecord()"><i class="fa fa-plus fa-fw"></i> New Record</button>
+							   	</div>
+							<div class="table-custom"> 
+								<table class="table table-hover table-striped table-bordered">
+						   			<thead>
+						   				<tr>
+						   					<th>Distance (Km)</th>
+						   					<th>Duration</th>
+											   <th>Verified</th>
+											    <th>Attachment Category</th>
+											<th>Attachment [Actual]</th>
+											<th>Attachment [Activity Photo]</th>
+						   					<th>Date</th>
+						   				</tr>
+						   			</thead>
+						   			<tbody>
+						   				<tr ng-repeat ="run in submitions.currentPageList">
+						   					<td >{{run.distance}}</td>
+						   					<td>{{run.time }}</td>
+											   <td><span class="{{run.verified=='VERIFIED' ? 'ok': run.verified=='NO'? 'error' : 'text-warning'}}">{{run.verified}}</span></td>
+											   <td>{{run.categ}}</td>
+											   <td class="table-item" ng-click='showAttachment(run)'>view attachment</td>
+											   <td class="table-item" ng-click='showAttachments(run)'>view attachment</td>
+						   					<td>{{run.createdAt | date}}</td>
+						   				</tr>
+						   			</tbody>
+						   		</table>
+						   		
+					   			<div uib-pagination class="custom-pagination" 
+					      			 total-items="submitions.totalItems" 
+					      			 ng-model="submitions.currentPage"
+					      			 max-size="submitions.maxSize" 
+					      			 boundary-links="true" 
+					      			 items-per-page="submitions.numPerPage" 
+					      			 ng-change="submitions.numPageChange()"
+					      			 ng-if="submitions.totalItems > 0"
+					      			 >
+					      		</div>
+					   		</div>
+						</div>
+				</div>
+				
+				</div>
+				
+			</div>
+	
+   		</div>
+      <!-- /.container-fluid -->
+      </div>
+  <!-- /#page-wrapper -->
+ <div class="modal fade modal-md in" id="add-record" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header modal-custom">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title">Record Details</h3>
+			</div>
+			<form ng-submit="addNewRecord()">
+				<div class="modal-body">
+					<fieldset>
+						<label>Distance (km)</label>
+						<input type="number" class="form-control" ng-model ="newRecord.distance" step="0.001" min="0" ng-required="true"/>
+						<label>Duration (hh:mm:ss)</label>
+						<div uib-timepicker ng-model="newRecord.time" ng-change="time_change()"  show-meridian="false" show-seconds="true" ng-required="true"></div>
+						<select class="form-control" ng-model="newRecord.categ" ng-required="true" ng-if="runEventReg.approved" >
+							<option value="">-----------SELECT CATEGORIES--------------</option>
+							
+							<option value="RUN" ng-if="runEventReg.eventCateg.category==='RUN' || runEventReg.eventCateg.category==='DUATHLON'">RUN</option>
+						
+							<option value="RIDE"  ng-if="runEventReg.eventCateg.category==='DUATHLON' || runEventReg.eventCateg.category=='RIDE'">RIDE</option>
+						
+						</select>
+					
+						<label>Upload proof of run</label>
+						<input type="file" ng-model = "newRecord.file" accept="image/x-png,image/gif,image/jpeg"  ng-required="true" file-input/>
+						<br/>
+						<label>Upload after activity photo (e.g. selfie, photo of surrounding, photo of bike, etc.)</label>
+						<input type="file" ng-model = "newRecord.files" accept="image/x-png,image/gif,image/jpeg"  ng-required="true" file-input/>
+						<br/>
+						<label>Do you want to add your pictures on public gallery?</label>
+						<input type="radio" ng-model="newRecord.gallery" value="1"  ng-checked="true">Yes
+  						<input type="radio"  ng-model="newRecord.gallery" value="0" >No				
+							<br/>
+							<br/>
+							<br/>
+						<div class="text-danger" style="font-size: 15px;">NOTE: All screenshots with No Date, Time and Distance will be tagged as <strong>INVALID</strong></div>
+						<br/>
+						<div class="text-danger">{{error}}</div>
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" type="submit">Save</button><button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="container text-center">
+	<div class="modal fade" role="dialog"   id="img-attach">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header modal-custom">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class='modal-body'>
+				
+						<img ng-src="/uploads/{{selectedRun.id}}"/>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container text-center">
+	<div class="modal fade" role="dialog"   id="img-attachs">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header modal-custom">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class='modal-body'>
+				
+						<img ng-src="/upload/{{selectedRun.id}}"/>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

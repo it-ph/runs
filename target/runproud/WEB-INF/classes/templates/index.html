@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      ng-app="run_proud"
+     >
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>Run Proud | Personiv</title>
+
+	<base href="/"></base>
+		
+	<link rel="shortcut icon" href="/app/img/favicon.ico" type="image/x-icon" />
+  	<link rel="icon" href="/app/img/favicon.ico" type="image/x-icon" />
+    <link href="/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+   
+    <link href="/vendor/bootstrap-timepicker/css/timepicker.css" rel="stylesheet" />
+ 
+    
+     <link href="/vendor/metisMenu/dist/metisMenu.css" rel="stylesheet" />
+     <link href="/app/css/sb-admin-2.css" rel="stylesheet" />
+    
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen"/>
+    <link href="/app/css/main.css" rel="stylesheet" />
+</head>
+<body  ng-controller="MainController">
+   	<div id="wrapper">
+   		<div ng-include="'/app/partials/nav.html'"  ng-if="showNav()" ng-controller="NavController"></div>
+      	<ui-view></ui-view>
+    </div>
+    <!-- /#wrapper -->
+ 	<script src="/vendor/jquery/dist/jquery.min.js"></script>
+ 	<script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+ 	<script src="/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+    <script src="/vendor/metisMenu/dist/metisMenu.js"></script>
+    <script src="/vendor/moment/min/moment.min.js"></script>
+    
+    <script src="/app/js/sb-admin-2.js"></script>
+    
+    <script src="/vendor/angular/angular.js"></script>   
+    <script src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/vendor/angular-cookies/angular-cookies.js"></script>
+    <script src="/vendor/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+   
+    <script src="/vendor/js-custom-select/js/customSelect.js"></script>
+    
+  	<script src="/vendor/angular-file-saver/dist/angular-file-saver.bundle.min.js"></script>
+  	
+    <script src="/vendor/angular-moment.js"></script>
+    
+    <script src="/app/_ng/app.js"></script>
+    <script src="/app/_ng/controller/main.controller.js"></script>
+    <script src="/app/_ng/controller/dashboard.controller.js"></script>
+    <script src="/app/_ng/controller/landing.controller.js"></script>
+    <script src="/app/_ng/controller/login.controller.js"></script>
+    <script src="/app/_ng/controller/register.controller.js"></script>
+    <script src="/app/_ng/controller/registrations.controller.js"></script>
+    <script src="/app/_ng/controller/run-registrations.controller.js"></script>
+    <script src="/app/_ng/controller/users.controller.js"></script>
+    <script src="/app/_ng/controller/record.controller.js"></script>
+    <script src="/app/_ng/controller/leaderboard.controller.js"></script>
+    <script src="/app/_ng/controller/new-record.controller.js"></script>
+    <script src="/app/_ng/controller/user-progress.controller.js"></script>
+    <script src="/app/_ng/controller/report.controller.js"></script>
+    <script src="/app/_ng/controller/event.controller.js"></script>
+    <script src="/app/_ng/controller/participant.controller.js"></script>
+    <script src="/app/_ng/controller/gallery.controller.js"></script>
+    
+    <script src="/app/_ng/controller/profile.controller.js"></script>
+    <script src="/app/_ng/controller/nav.controller.js"></script>
+    <script src="/app/_ng/service/login.service.js"></script>
+    <script src="/app/_ng/service/access.service.js"></script>
+    <script src="/app/_ng/service/registrations.service.js"></script>
+    <script src="/app/_ng/service/run-event.service.js"></script>
+    <script src="/app/_ng/service/notif.service.js"></script>
+    <script src="/app/_ng/service/users.service.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+ 
+ </body>
+</html>

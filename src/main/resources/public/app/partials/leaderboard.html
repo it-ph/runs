@@ -1,0 +1,532 @@
+
+
+   
+  <!-- Page Content -->
+  <div id="page-wrapper">
+      <div class="container-fluid">
+	      	
+	      <div class='row'> 
+	      	<div class="col-lg-12">
+				
+			<div class="panel panel-custom">
+				<div class="panel-heading"><h3>Leaderboards </h3></div>
+				<div class="panel-body">
+			      	<ul class="nav nav-pills">
+					  <li class="active"><span data-toggle="tab" data-target="#all">ALL</span></li>
+					  <li><span data-toggle="tab" data-target="#blitz">RUN PROUD</span></li>
+					  <li><span data-toggle="tab" data-target="#range1" >RIDE PROUD</span></li>
+					  <li><span data-toggle="tab" data-target="#blitz-range1" >DUATHLON</span></li>
+					  <!-- <li><span data-toggle="tab" data-target="#range2" >RANGE II</span></li>
+					  <li><span data-toggle="tab" data-target="#blitz-range2" >BLITZ RANGE II</span></li>
+					  <li><span data-toggle="tab" data-target="#range3" >RANGE III</span></li>
+					  <li><span data-toggle="tab" data-target="#full-metal" >FULL METAL</span></li> -->
+					</ul>
+					
+					<div class="tab-content">
+					  <div id="all" class="tab-pane fade in active">
+					  <br/>
+					   <div class ="page-search">
+							<span class="num-entries">Show<select ng-model="all_records.numPerPage" ng-options="page for page in all_records.numPerPageSelections" ng-change="all_records.numPageChange()"></select>
+								entries
+							</span>
+							<div class="table-custom"> 
+								<table class="table table-hover table-striped table-bordered">
+					   			<thead>
+					   				<tr>
+					   					<th>Name</th>
+					   					<th>Distance (Km)</th>
+					   					<th>Duration</th>
+					   					<th>Category</th>
+					   					<th>Pace</th>
+					   				</tr>
+					   			</thead>
+					   			<tbody>
+					   				<tr ng-repeat="rec in all_records.currentPageList">
+					   					<td class="dropdown table-item">
+							                  <span class="dropdown-toggle" data-toggle="dropdown">
+							                  		{{rec.user.fullname}}
+							                  </span>
+							                
+							                  <ul class="dropdown-menu table-dropdown">
+						                        <li >
+						                        	<span ng-click="viewProgress(rec)">
+						                        		view progress
+						                        	</span>
+						                        </li>
+						                      </ul>
+						                      
+				      					</td>
+					   					<td>{{rec.distanceTraveled}}</td>
+					   					<td>{{rec.totalElapseTime}}</td>
+					   					<td>{{rec.eventCategory.category}}</td>
+					   					<td>{{rec.pace}}</td>
+					   				</tr>
+					   			
+					   			</tbody>
+					   		</table>
+					   		</div>
+					   		<div uib-pagination class="custom-pagination" 
+						      			 total-items="all_records.totalItems" 
+						      			 ng-model="all_records.currentPage"
+						      			  max-size="all_records.maxSize" 
+						      			  boundary-links="true" 
+						      			  items-per-page="all_records.numPerPage" 
+						      			  ng-change="all_records.numPageChange()">
+					
+				      		</div>
+					  	</div>
+					  </div>
+					  
+					  <div id="blitz" class="tab-pane fade in">
+					    <br/>
+				 	
+					   <div class ="page-search">
+							<span class="num-entries">Show<select ng-model="blitz.numPerPage" ng-options="page for page in blitz.numPerPageSelections" ng-change="blitz.numPageChange()"></select>
+								entries
+							</span>
+							<div class="table-custom"> 
+								<table class="table table-hover table-striped table-bordered">
+					   			<thead>
+					   				<tr>
+					   					<th>Name</th>
+					   					<th>Distance (Km)</th>
+					   					<th>Duration</th>
+					   					<th>Pace</th>
+					   				</tr>
+					   			</thead>
+					   			<tbody>
+					   				<tr ng-repeat="blit in blitz.currentPageList">
+					   					<td class="dropdown table-item">
+							                  <span class="dropdown-toggle" data-toggle="dropdown">
+							                  		{{blit.user.fullname}}
+							                  </span>
+							                
+							                  <ul class="dropdown-menu table-dropdown">
+						                        <li >
+						                        	<span ng-click="viewProgress(blit)">
+						                        		view progress
+						                        	</span>
+						                        </li>
+						                      </ul>
+						                      
+				      					</td>
+					   					<td>{{blit.distanceTraveled}}</td>
+					   					<td>{{blit.totalElapseTime}}</td>
+					   					<td>{{blit.pace}}</td>
+					   				</tr>
+					   			
+					   			</tbody>
+					   		</table>
+					   		</div>
+				   			<div uib-pagination class="custom-pagination" 
+					      			 total-items="blit.totalItems" 
+					      			 ng-model="blit.currentPage"
+					      			  max-size="blit.maxSize" 
+					      			  boundary-links="true" 
+					      			  items-per-page="blit.numPerPage" 
+					      			  ng-change="blit.numPageChange()">
+				
+				      		</div>
+					  	</div>
+					  </div>
+					  <div id="range1" class="tab-pane fade">
+					    <br/>
+				 	
+						   <div class ="page-search">
+								<span class="num-entries">Show<select ng-model="range1.numPerPage" ng-options="page for page in range1.numPerPageSelections" ng-change="range1.numPageChange()"></select>
+									entries
+								</span>
+								<div class="table-custom"> 
+									<table class="table table-hover table-striped table-bordered">
+						   			<thead>
+						   				<tr>
+						   					<th>Name</th>
+						   					<th>Distance (Km)</th>
+						   					<th>Duration</th>
+						   					<th>Pace</th>
+						   				</tr>
+						   			</thead>
+						   			<tbody>
+						   				<tr ng-repeat="range1 in range1.currentPageList">
+						   					<td class="dropdown table-item">
+							                  <span class="dropdown-toggle" data-toggle="dropdown">
+							                  		{{range1.user.fullname}}
+							                  </span>
+							                
+							                  <ul class="dropdown-menu table-dropdown">
+						                        <li >
+						                        	<span ng-click="viewProgress(range1)">
+						                        		view progress
+						                        	</span>
+						                        </li>
+						                      </ul>
+						                      
+				      					</td>
+						   					<td>{{range1.distanceTraveled}}</td>
+						   					<td>{{range1.totalElapseTime}}</td>
+						   					<td>{{range1.pace}}</td>
+						   				</tr>
+						   			
+						   			</tbody>
+						   		</table>
+						   		</div>
+						   		<div uib-pagination class="custom-pagination" 
+					      			 total-items="range1.totalItems" 
+					      			 ng-model="range1.currentPage"
+					      			  max-size="range1.maxSize" 
+					      			  boundary-links="true" 
+					      			  items-per-page="range1.numPerPage" 
+					      			  ng-change="range1.numPageChange()">
+				
+				      			</div>
+						  	</div>
+					  </div>
+					  <div id="blitz-range1" class="tab-pane fade">
+					    <br/>
+				 	
+						   <div class ="page-search">
+								<span class="num-entries">Show<select ng-model="blitz_range1.numPerPage" ng-options="page for page in blitz_range1.numPerPageSelections" ng-change="blitz_range1.numPageChange()"></select>
+									entries
+								</span>
+								<div class="table-custom"> 
+									<table class="table table-hover table-striped table-bordered">
+						   			<thead>
+						   				<tr>
+						   					<th>Name</th>
+						   					<th>Distance (Km)</th>
+						   					<th>Duration</th>
+						   					<th>Pace</th>
+						   				</tr>
+						   			</thead>
+						   			<tbody>
+						   				<tr ng-repeat="blitz_range1 in blitz_range1.currentPageList">
+						   					<td class="dropdown table-item">
+							                  <span class="dropdown-toggle" data-toggle="dropdown">
+							                  		{{blitz_range1.user.fullname}}
+							                  </span>
+							                
+							                  <ul class="dropdown-menu table-dropdown">
+						                        <li >
+						                        	<span ng-click="viewProgress(blitz_range1)">
+						                        		view progress
+						                        	</span>
+						                        </li>
+						                      </ul>
+						                      
+				      						</td>
+						   					<td>{{blitz_range1.distanceTraveled}}</td>
+						   					<td>{{blitz_range1.totalElapseTime}}</td>
+						   					<td>{{blitz_range1.pace}}</td>
+						   				</tr>
+						   			
+						   			</tbody>
+						   		</table>
+						   		</div>
+						   		<div uib-pagination class="custom-pagination" 
+					      			 total-items="blitz_range1.totalItems" 
+					      			 ng-model="blitz_range1.currentPage"
+					      			  max-size="blitz_range1.maxSize" 
+					      			  boundary-links="true" 
+					      			  items-per-page="blitz_range1.numPerPage" 
+					      			  ng-change="blitz_range1.numPageChange()">
+				      			</div>
+						  	</div>
+					  </div>
+					    <div id="range2" class="tab-pane fade">
+					    <br/>
+				 	
+						   <div class ="page-search">
+								<span class="num-entries">Show<select ng-model="range2.numPerPage" ng-options="page for page in range2.numPerPageSelections" ng-change="range2.numPageChange()"></select>
+									entries
+								</span>
+								<div class="table-custom"> 
+									<table class="table table-hover table-striped table-bordered">
+						   			<thead>
+						   				<tr>
+						   					<th>Name</th>
+						   					<th>Distance (Km)</th>
+						   					<th>Duration</th>
+						   					<th>Pace</th>
+						   				</tr>
+						   			</thead>
+						   			<tbody>
+						   				<tr ng-repeat="range_2 in range2.currentPageList">
+						   					<td class="dropdown table-item">
+							                  <span class="dropdown-toggle" data-toggle="dropdown">
+							                  		{{range_2.user.fullname}}
+							                  </span>
+							                
+							                  <ul class="dropdown-menu table-dropdown">
+						                        <li >
+						                        	<span ng-click="viewProgress(range_2)">
+						                        		view progress
+						                        	</span>
+						                        </li>
+						                      </ul>
+						                      
+				      						</td>
+						   					<td>{{range_2.distanceTraveled}}</td>
+						   					<td>{{range_2.totalElapseTime}}</td>
+						   					<td>{{range_2.pace}}</td>
+						   				</tr>
+						   			
+						   			</tbody>
+						   		</table>
+						   		</div>
+						   		
+						   		<div uib-pagination class="custom-pagination" 
+					      			 total-items="range2.totalItems" 
+					      			 ng-model="range2.currentPage"
+					      			  max-size="range2.maxSize" 
+					      			  boundary-links="true" 
+					      			  items-per-page="range2.numPerPage" 
+					      			  ng-change="range2.numPageChange()">
+				      			</div>
+						  	</div>
+					  </div>
+			  	    <div id="blitz-range2" class="tab-pane fade">
+				   	 <br/>
+			 	
+					   <div class ="page-search">
+							<span class="num-entries">Show<select ng-model="blitz_range2.numPerPage" ng-options="page for page in blitz_range2.numPerPageSelections" ng-change="blitz_range2.numPageChange()"></select>
+								entries
+							</span>
+							<div class="table-custom"> 
+								<table class="table table-hover table-striped table-bordered">
+					   			<thead>
+					   				<tr>
+					   					<th>Name</th>
+					   					<th>Distance (Km)</th>
+					   					<th>Duration</th>
+					   					<th>Pace</th>
+					   				</tr>
+					   			</thead>
+					   			<tbody>
+					   				<tr ng-repeat="blitz_range2 in blitz_range2.currentPageList">
+					   					<td class="dropdown table-item">
+						                  <span class="dropdown-toggle" data-toggle="dropdown">
+						                  		{{blitz_range2.user.fullname}}
+						                  </span>
+						                
+						                  <ul class="dropdown-menu table-dropdown">
+					                        <li >
+					                        	<span ng-click="viewProgress(blitz_range2)">
+					                        		view progress
+					                        	</span>
+					                        </li>
+					                      </ul>
+					                      
+			      						</td>
+					   					<td>{{blitz_range2.distanceTraveled}}</td>
+					   					<td>{{blitz_range2.totalElapseTime}}</td>
+					   					<td>{{blitz_range2.pace}}</td>
+					   				</tr>
+					   			
+					   			</tbody>
+					   		</table>
+					   		</div>
+					   		<div uib-pagination class="custom-pagination" 
+					      			 total-items="blitz_range2.totalItems" 
+					      			 ng-model="blitz_range2.currentPage"
+					      			  max-size="blitz_range2.maxSize" 
+					      			  boundary-links="true" 
+					      			  items-per-page="blitz_range2.numPerPage" 
+					      			  ng-change="blitz_range2.numPageChange()">
+				      			</div>
+					  	</div>
+				  </div>
+				   <div id="range3" class="tab-pane fade">
+				   	 <br/>
+			 	
+					   <div class ="page-search">
+							<span class="num-entries">Show<select ng-model="range3.numPerPage" ng-options="page for page in range3.numPerPageSelections" ng-change="range3.numPageChange()"></select>
+								entries
+							</span>
+							<div class="table-custom"> 
+								<table class="table table-hover table-striped table-bordered">
+					   			<thead>
+					   				<tr>
+					   					<th>Name</th>
+					   					<th>Distance (Km)</th>
+					   					<th>Duration</th>
+					   					<th>Pace</th>
+					   				</tr>
+					   			</thead>
+					   			<tbody>
+					   				<tr ng-repeat="range3 in range3.currentPageList">
+					   					<td class="dropdown table-item">
+						                  <span class="dropdown-toggle" data-toggle="dropdown">
+						                  		{{range3.user.fullname}}
+						                  </span>
+						                
+						                  <ul class="dropdown-menu table-dropdown">
+					                        <li >
+					                        	<span ng-click="viewProgress(range3)">
+					                        		view progress
+					                        	</span>
+					                        </li>
+					                      </ul>
+					                      
+			      						</td>
+					   					<td>{{range3.distanceTraveled}}</td>
+					   					<td>{{range3.totalElapseTime}}</td>
+					   					<td>{{range3.pace}}</td>
+					   				</tr>
+					   			
+					   			</tbody>
+					   		</table>
+					   		</div>
+					   		<div uib-pagination class="custom-pagination" 
+					      			 total-items="range3.totalItems" 
+					      			 ng-model="range3.currentPage"
+					      			  max-size="range3.maxSize" 
+					      			  boundary-links="true" 
+					      			  items-per-page="range3.numPerPage" 
+					      			  ng-change="range3.numPageChange()">
+				      			</div>
+					  	</div>
+				  </div>
+				  	   <div id="full-metal" class="tab-pane fade">
+				   	 <br/>
+			 	
+					   <div class ="page-search">
+							<span class="num-entries">Show<select ng-model="full_metal.numPerPage" ng-options="page for page in full_metal.numPerPageSelections" ng-change="full_metal.numPageChange()"></select>
+								entries
+							</span>
+							<div class="table-custom"> 
+								<table class="table table-hover table-striped table-bordered">
+					   			<thead>
+					   				<tr>
+					   					<th>Name</th>
+					   					<th>Distance (Km)</th>
+					   					<th>Duration</th>
+					   					<th>Pace</th>
+					   				</tr>
+					   			</thead>
+					   			<tbody>
+					   				<tr ng-repeat="full_metal in full_metal.currentPageList">
+					   					<td class="dropdown table-item">
+						                  <span class="dropdown-toggle" data-toggle="dropdown">
+						                  		{{full_metal.user.fullname}}
+						                  </span>
+						                
+						                  <ul class="dropdown-menu table-dropdown">
+					                        <li >
+					                        	<span ng-click="viewProgress(full_metal)">
+					                        		view progress
+					                        	</span>
+					                        </li>
+					                      </ul>
+					                      
+			      						</td>
+					   					<td>{{full_metal.distanceTraveled}}</td>
+					   					<td>{{full_metal.totalElapseTime}}</td>
+					   					<td>{{full_metal.pace}}</td>
+					   				</tr>
+					   			
+					   			</tbody>
+					   		</table>
+					   		</div>
+				   			<div uib-pagination class="custom-pagination" 
+				      			 total-items="full_metal.totalItems" 
+				      			 ng-model="full_metal.currentPage"
+				      			  max-size="full_metal.maxSize" 
+				      			  boundary-links="true" 
+				      			  items-per-page="full_metal.numPerPage" 
+				      			  ng-change="full_metal.numPageChange()">
+			      			</div>
+					  	</div>
+				  </div>
+				</div>
+			
+			</div>
+		</div>
+			
+   	</div>
+	</div>
+		<!-- 
+			<div class="row">
+				<div class="col-lg-12">
+				
+					<div class="panel panel-custom">
+						<div class="panel-heading"><h3>Leaderboards </h3></div>
+						<div class="panel-body">
+							  <div class ="page-search">
+									<span class="num-entries">Show<select ng-model="records.numPerPage" ng-options="page for page in records.numPerPageSelections" ng-change="records.numPageChange()"></select>
+										entries
+									</span>
+									<div class="search-box">
+										<div class="input-group">
+									        <input class="form-control search" type="text" placeholder="Search" ng-model="records.searchKeyword" ng-change="records.search()" />
+									        <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+							      		</div>
+									</div>
+									
+							   	</div>
+							<div class="table-custom"> 
+								<table class="table table-hover table-striped table-bordered">
+						   			<thead>
+						   				<tr>
+						   					<th>Distance (Km)</th>
+						   					<th>Duration</th>
+						   					<th>Verified</th>
+						   					<th>Attachment</th>
+						   					<th>Date</th>
+						   				</tr>
+						   			</thead>
+						   			<tbody>
+						   				<tr ng-repeat ="run in records.currentPageList">
+						   					
+						   					<td class="dropdown table-item">
+								                  <span class="dropdown-toggle" data-toggle="dropdown">
+								                  		{{run.distance}}
+								                  </span>
+								                  <div class="arrow-up" ng-if="run.verified ==null"></div>
+								                  <div class="arrow-up-border" ng-if="run.verified ==null"></div>
+								                  
+								                  <ul class="dropdown-menu" ng-if="run.verified ==null" >
+							                        <li ng-click="approve(run)">
+							                        	
+							                        	<span><i class="fa fa-check fa-fw ok"></i> Approve</span>
+							                        </li>
+							                        <li ng-click="dissaprove(run)">
+							                        	 <span><i class="fa fa-times fa-fw error"></i> Disapprove</span>		                       
+							                        </li>
+							                      </ul>
+							                      
+					      					</td>
+					      					<td >{{run.time }}</td>
+						   					<td><span class="{{run.verified==null? 'text-warning': run.verified? 'ok': 'error'}}">{{run.verified ==null? 'no' : run.verified? 'verified' :'invalid'}}</span></td>
+						   					<td class="table-item" ng-click='showAttachment(run)'>view attachment</td>
+						   					<td>{{run.createdAt | date}}</td>
+						   				</tr>
+						   			</tbody>
+						   		</table>
+					   		</div>
+						</div>
+				</div>
+				
+				</div>
+				 -->
+			</div>
+	
+      <!-- /.container-fluid -->
+      </div>
+      
+  <div class="container text-center">
+	<div class="modal fade" role="dialog"   id="img-attach">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header modal-custom">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class='modal-body'>
+				
+						<img ng-src="/uploads/{{selectedRecord.id}}"/>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

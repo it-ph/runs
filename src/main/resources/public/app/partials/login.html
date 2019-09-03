@@ -1,0 +1,103 @@
+
+<div id="login-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-offset-3">
+        <div class="login-panel panel">
+
+          <div class="panel-body">
+            <form role="form" ng-submit="logUser()">
+
+      
+              <fieldset>
+              <div  class="login-logo-wrapper">
+              	 <div class="login-logo">
+                  <img src="/app/img/login/login_logo.jpg" />
+                  <br>
+                  <br>
+              	</div>
+              </div>
+             
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="username"><i class="fa fa-user fa-fw" ></i></span>
+                    <input class="form-control" placeholder="Username" name="text" type="text" aria-label="username" aria-describedby="username" ng-model="user.email"/>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="fa fa-lock fa-fw" ></i></span>
+                    <input class="form-control" placeholder="Password" name="password" type="password"  aria-label="username" aria-describedby="password" ng-model="user.password"/>
+                  </div>
+                </div>
+
+                <div class="form-group text-left has-error">
+                  <div class="help-block" style="text-align:center;">
+                    <i class="lnr-"></i><span>{{error}}</span>
+                  </div>
+                </div>
+                <!-- Change this to a button or input when using this as a form -->
+                <button type="submit" class="btn btn-lg btn-primary btn-block"><i class="lnr lnr-rocket"></i> Login</button>
+           
+                <br />
+                <div class="text-center">
+                  <a ui-sref="landing" class="login-back-btn"><i class="lnr lnr-undo"></i> Back to home page</a>
+                </div>
+                <br/>
+                <div class="text-center">
+                  <a class="rest-pass-btn" ng-click='resetPassword()'><i class="lnr-"></i> Forgot Password</a>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container text-center">
+	<div class="modal fade" role="dialog"   id="resetpassword">
+		<div class="modal-dialog modal-x2">
+			<div class="modal-content">
+				<div class="modal-header modal-custom">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class='modal-body'>
+            <div class="text-center">
+                <p>Enter your recovery email</p>
+              </div>
+          <form role="form" ng-submit="resetPasswords()">
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon" id="username"><i class="fa fa-user fa-fw" ></i></span>
+              <input class="form-control" placeholder="Email" name="text" type="text" aria-label="email" aria-describedby="email" ng-model="reset.email" required/>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-lg btn-primary btn-block"><i class="lnr lnr-rocket"></i>Submit</button>
+          <div class="form-group text-left has-error">
+            <div class="help-block" style="text-align:center;">
+              <i class="lnr-"></i><span>{{errorForgot}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="help-block" style="text-align:center;">
+                <span class="approve">{{msgForgot}}</span>
+            </div>
+          </div>
+          </form>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+   
+  <!-- Page Content -->
+ 

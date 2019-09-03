@@ -1,0 +1,80 @@
+<!-- Page Content -->
+  <div id="page-wrapper">
+      <div class="container-fluid">
+      
+      	<div class="row">
+      	<div class="col-lg-12"></div>
+			<div class="col-lg-12">
+			
+				<div class="panel panel-custom">
+					<div class="panel-heading"><h3>Run Event Participants </h3></div>
+					<div class="panel-body">
+						  <div class ="page-search">
+								<span class="num-entries">Show<select ng-model="reports.numPerPage" ng-options="page for page in reports.numPerPageSelections" ng-change="reports.numPageChange()"></select>
+									entries
+								</span>
+								<div class="search-box">
+									<div class="input-group">
+									        <input class="form-control search" type="text" placeholder="Search" ng-model="reports.searchKeyword" ng-change="reports.search()" />
+									        <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+								      </div>
+							     </div>
+							</div>
+						<div class="table-custom"> 
+				      		<table class="table table-hover table-striped table-bordered">
+				      			<thead>
+				      				<tr>
+				      					<th>Full name</th>
+										<th>Email</th>
+										<th>Gender</th>
+				      					<th>Facility</th>
+				      					<th>Approved</th>
+				      					<th>Date Created</th>
+				      					<th>Date Updated</th>
+				      				</tr>
+				      			</thead>
+				      			<tbody>
+				      				<tr ng-repeat ="report in reports.currentPageList">
+				      					<td class="dropdown table-item">
+							                  <span class="dropdown-toggle" data-toggle="dropdown">
+							                  		{{report.fullname}}
+							                  </span>
+							                  
+							                  <ul class="dropdown-menu table-dropdown" >
+						                        <li ng-click="approve(report)"  ng-if="!report.approved" >
+						                        	
+						                        	<span><i class="fa fa-check fa-fw approve ok"></i> Approve</span>
+						                        </li>
+						                        <li ng-click="deleteUserReg(report)">
+						                        	<span><i class="fa fa-times fa-fw error"></i> delete</span>
+						                        </li>
+						                       
+						                      </ul>
+				      					</td>
+										<td>{{report.email}}</td>
+										<td>{{report.gender}}</td>
+										<td>{{report.facility}}</td>
+										<td>{{report.gender}}</td>  
+				      					<td><span class="{{report.approved? 'ok':'error'}}">{{report.approved ? 'YES' : 'NO'}}</span></td>
+				      					<td>{{report.createdAt | date}}</td>
+				      					<td>{{report.updatedAt | date}}</td>
+				      				</tr>
+				      			</tbody>
+				      		</table>
+				      		<div uib-pagination class="custom-pagination" 
+				      			 total-items="reports.totalItems" 
+				      			 ng-model="reports.currentPage"
+				      			  max-size="reports.maxSize" 
+				      			  boundary-links="true" 
+				      			  items-per-page="reports.numPerPage" 
+				      			  ng-change="reports.numPageChange()">
+ 
+			      		</div>
+		      		</div>
+	      		</div>
+      		</div>
+   		</div>
+      </div>
+      </div>
+      <!-- /.container-fluid -->
+  </div>
